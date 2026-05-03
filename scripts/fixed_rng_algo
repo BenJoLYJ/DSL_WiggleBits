@@ -1,0 +1,56 @@
+`timescale 1ns / 1ps
+
+module fixed_rng_algo_processor(
+    input  wire        clk,
+    input  wire        reset,
+    input  wire        ap_valid,
+    input  wire        seed_load,
+    output reg  [31:0] rng_num_out
+);
+
+    // MCG parameters
+    localparam [31:0] MCG_A = 32'h41C64E6D;
+
+    // LCG parameters
+    localparam [31:0] LCG_A = 32'h343FD;
+    localparam [31:0] LCG_C = 32'h269EC3;
+
+    // Fixed deterministic seed for reproducibility testing
+    localparam [31:0] FIXED_SEED = 32'hC0FFEE42;
+
+    reg [31:0] mcg_state;
+    reg [31:0] lcg_state;
+
+    wire [31:0] transformed_seed;
+
+    // Replace VN/Markov input with fixed seed
+    assign transformed_seed = FIXED_SEED;
+
+    always @(posedge clk or negedge reset) begin
+        if (!reset) begin
+            mcg_state   <= 32'h1;
+            lcg_state   <= 32'h1;
+            rng_num_out <= 32'h0;
+
+        end else if (seed_load) begin
+            // deterministic initialization
+            mcg_state <= transformed_seed ^ 32'hA5A5A5A5;
+            lcg_state <= transformed_seed ^ 32'h5A5A5A5A;
+
+        end else begin
+
+            // MCG update
+            mcg_state <= MCG_A * mcg_state;
+
+            // MCG to LCG mapping
+            lcg_state <= (LCG_A * mcg_state) + LCG_C;
+
+            // Output RNG value
+            if (ap_valid) begin
+                rng_num_out <= lcg_state;
+            end
+
+        end
+    end
+
+endmodule

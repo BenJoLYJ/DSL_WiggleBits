@@ -1,0 +1,11 @@
+`timescale 1ns / 1ps
+
+module signal_processor_xor (
+    input  wire [11:0] raw_bit_in,
+    input  wire raw_valid,
+    output wire [11:0] transformed_sig
+);
+
+assign transformed_sig = raw_bit_in;
+
+endmodule
