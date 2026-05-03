@@ -269,7 +269,7 @@ ADC → LSB XOR → Markov → Von Neumann → MCG → LCG → Output
 
 ---
 
-## Bottom Line
+## Conclusion
 
 This project is a **comparative entropy conditioning system**, not a single RNG design:
 
