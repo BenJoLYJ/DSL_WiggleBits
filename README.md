@@ -5,7 +5,7 @@
 ### 1. Clone Repository
 ```bash
 git clone <repo link>
-cd dsl_rng
+cd DSL_WiggleBits
 ```
 
 ---
