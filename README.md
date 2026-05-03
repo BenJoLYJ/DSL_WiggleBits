@@ -1,5 +1,16 @@
 # DSL_WiggleBits
 
+---
+
+## Overview
+This project explores hardware-based random number generation using FPGA and external ADC noise sources.
+
+The key focus is a **comparative study of two entropy conditioning pipelines**, both feeding a shared pseudo-random generator composed of an **MCG (Multiplicative Congruential Generator) followed by an LCG (Linear Congruential Generator)**.
+
+The system evaluates how preprocessing affects entropy quality before deterministic expansion.
+
+---
+
 ## Quick Setup
 
 ### 1. Clone Repository
@@ -95,16 +106,6 @@ or
 python py_script/graphplotter_2ch.py
 ```
 
----
-
-## Overview
-This project explores hardware-based random number generation using FPGA and external ADC noise sources.
-
-The key focus is a **comparative study of two entropy conditioning pipelines**, both feeding a shared pseudo-random generator composed of an **MCG (Multiplicative Congruential Generator) followed by an LCG (Linear Congruential Generator)**.
-
-The system evaluates how preprocessing affects entropy quality before deterministic expansion.
-
----
 
 ## System Architecture (Global)
 
